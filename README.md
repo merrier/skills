@@ -9,6 +9,7 @@
 | Skill | 说明 | 安装 |
 | --- | --- | --- |
 | `plugin-store-assets` | 生成浏览器插件或扩展商店素材，包括 Chrome Web Store 文案、图标、截图、推广图、多语言 README 和通信架构图。 | `$skill-installer install https://github.com/merrier/skills/tree/main/plugin-store-assets` |
+| `toy-model-info` | 从模型实拍、包装及货号识别产品，优先用 AnySearch 检索，保存逐项来源与核实状态，供封面和发布复用。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info` |
 | `toy-cover` | 根据汽车模型与玩具实拍，按画幅分别选图，确认主副标题后制作多比例封面。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-cover` |
 | `ego-publish` | 使用 Ego lite 统一确认发布方案，依次向小红书、B站、抖音和视频号发布；各平台独立标签页，完成后保留结果供检查。 | `$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish` |
 
@@ -20,11 +21,14 @@
 
 ```bash
 $skill-installer install https://github.com/merrier/skills/tree/main/plugin-store-assets
+$skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-cover
 $skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
 ```
 
 安装完成后，重启 Codex 以加载新的 skill。
+
+`toy-model-info` 优先复用已安装的 [AnySearch skill](https://github.com/anysearch-ai/anysearch-skill) 检索及提取原文；不可用时可使用用户允许的现有搜索工具，不自动安装或注册服务。资料保存在各模型素材目录的 `模型信息.md`，区分已核实、用户提供、待核实与冲突信息。`toy-cover` 和 `ego-publish` 优先读取这份资料，缺少关键参数时可调用已安装的 `toy-model-info` 补充；资料整理不代替文案确认或平台发布授权。
 
 `toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。它使用完整正文的统一发布清单，核对素材指纹后续做；个人偏好保存在仓库外的本机配置。清单、配置和核验方法见 [发布清单约定](ego-publish/references/publish-package.md)。仓库不包含素材照片、账号登录状态或历史发布记录。
 
@@ -47,6 +51,7 @@ ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 .
 ├── README.md
 ├── AGENTS.md
+├── toy-model-info/
 ├── toy-cover/
 ├── ego-publish/
 └── plugin-store-assets/
