@@ -26,7 +26,7 @@ $skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
 
 安装完成后，重启 Codex 以加载新的 skill。
 
-`toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。仓库不包含素材照片、账号登录状态或历史发布记录。
+`toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。它使用完整正文的统一发布清单，核对素材指纹后续做；个人偏好保存在仓库外的本机配置。清单、配置和核验方法见 [发布清单约定](ego-publish/references/publish-package.md)。仓库不包含素材照片、账号登录状态或历史发布记录。
 
 如果只是本机开发调试，也可以将 skill 目录软链接到用户 skills 目录：
 
