@@ -9,6 +9,8 @@
 | Skill | 说明 | 安装 |
 | --- | --- | --- |
 | `plugin-store-assets` | 生成浏览器插件或扩展商店素材，包括 Chrome Web Store 文案、图标、截图、推广图、多语言 README 和通信架构图。 | `$skill-installer install https://github.com/merrier/skills/tree/main/plugin-store-assets` |
+| `toy-cover` | 根据汽车模型与玩具实拍，按画幅分别选图，确认主副标题后制作多比例封面。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-cover` |
+| `ego-publish` | 使用 Ego lite 统一确认发布方案，依次向小红书、B站、抖音和视频号发布；各平台独立标签页，完成后保留结果供检查。 | `$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish` |
 
 发布到 GitHub 并设为 public 后，其他用户就可以通过上面的命令安装。
 
@@ -18,22 +20,35 @@
 
 ```bash
 $skill-installer install https://github.com/merrier/skills/tree/main/plugin-store-assets
+$skill-installer install https://github.com/merrier/skills/tree/main/toy-cover
+$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
 ```
 
 安装完成后，重启 Codex 以加载新的 skill。
+
+`toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。仓库不包含素材照片、账号登录状态或历史发布记录。
 
 如果只是本机开发调试，也可以将 skill 目录软链接到用户 skills 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
-ln -s /Users/bytedance/repos/mine/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
+ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 ```
+
+## Maintain And Sync
+
+维护时以本地 Git 仓库为唯一源文件，将需要的 skill 目录软链接到项目的 `.agents/skills/`，这样编辑项目中的 skill 就会直接修改仓库内容，不需要维护两份副本。
+
+在用户已明确授权持续同步的工作区，每次完成 skill 更新后，按 [AGENTS.md](AGENTS.md) 校验、检查差异、限定范围提交、推送并核验远端提交。此流程由助手完成一次更新时触发，不依赖后台文件监听。修改尚未完成或校验失败时不推送；该维护授权也不代替社交平台的发布授权。
 
 ## Repository Structure
 
 ```text
 .
 ├── README.md
+├── AGENTS.md
+├── toy-cover/
+├── ego-publish/
 └── plugin-store-assets/
     ├── SKILL.md
     ├── LICENSE.txt

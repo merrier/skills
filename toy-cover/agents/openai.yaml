@@ -1,0 +1,4 @@
+interface:
+  display_name: "玩具与车模封面"
+  short_description: "按画幅分别选择实拍素材，确认双标题后制作五种比例的评测、介绍和图集封面"
+  default_prompt: "用 $toy-cover 读取我指定文件夹的图片，按五种画幅分别选图和规划构图，提出主标题和副标题供我确认，再制作一套封面。"
