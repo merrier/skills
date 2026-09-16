@@ -42,7 +42,7 @@ def config():
     allowed = {'schemaVersion', 'timezone', 'defaultPlatforms', 'keepResultTabs', 'bodyStyle', 'platforms'}
     require(not value.keys() - allowed, 'Unknown private preference; do not store credentials or publish authorization')
     result = {'schemaVersion': 1, 'timezone': 'Asia/Shanghai', 'defaultPlatforms': ['xiaohongshu'],
-              'keepResultTabs': True, 'bodyStyle': '模型基础信息置顶，每项单独一行，缺项省略；后接实物观察、细节介绍和互动问题', 'platforms': {}}
+              'keepResultTabs': True, 'bodyStyle': '模型基础信息置顶，每项用 emoji 字段：值 单独一行，缺项省略；后接实物观察、细节介绍和互动问题', 'platforms': {}}
     result.update(value)
     require(result['schemaVersion'] == 1, 'Unsupported config schemaVersion')
     ZoneInfo(result['timezone'])

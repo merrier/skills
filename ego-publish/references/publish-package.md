@@ -14,7 +14,7 @@
 | `timezone` | IANA 时区，如 `Asia/Shanghai`；最终定时保存带偏移的绝对时间 |
 | `defaultPlatforms` | 未指定平台时的目标列表；默认仅小红书，不代表发布授权 |
 | `keepResultTabs` | 完成后保留各平台独立结果页；默认 `true` |
-| `bodyStyle` | 正文写作偏好；模型默认先逐行列出已核实基础信息，缺项省略，再写实物观察、细节介绍和互动问题；具体格式见主流程 |
+| `bodyStyle` | 正文写作偏好；模型默认先用「emoji 字段：值」逐行列出已核实基础信息，缺项省略，再写实物观察、细节介绍和互动问题；格式与逐平台显示核验见主流程 |
 | `platforms.<平台>.titleFormat` | 平台标题格式偏好 |
 | `platforms.<平台>.collectionRule` | `per_post` 或 `model_scale` |
 | `platforms.<平台>.collections` | 比例到合集全名的映射；必须到当前账号页面核实存在 |
@@ -37,7 +37,7 @@
   "platformOrder": ["xiaohongshu", "bilibili"],
   "shared": {
     "title": "小车身，大尾翼",
-    "body": "比例：1:43\n材质：已核实的材质\n品牌：已核实的模型厂牌\n车型与涂装：已核实的车型及版本\n\n实物观察与细节介绍。\n\n给读者的互动问题。",
+    "body": "📏 比例：1:43\n🧱 材质：已核实的材质\n🏷️ 品牌：已核实的模型厂牌\n🚗 车型：已核实的车型\n🎨 涂装：已核实的版本\n\n实物观察与细节介绍。\n\n给读者的互动问题。",
     "topics": ["汽车模型"],
     "media": ["/素材目录/封面_3x4.png", "/素材目录/前侧.jpg", "/素材目录/后侧.jpg"],
     "covers": {},
@@ -128,7 +128,7 @@ python3 '<skill>/scripts/publish_package.py' check '/素材目录/发布清单.j
 
 在 `<平台>发布记录.json` 的 `preflight` 增加必要证据：
 
-- `fields`：各字段的 `expected`、`actual`、`verifiedAt` 与 `source`（主表单／草稿恢复页）；核验过才标一致。
+- `fields`：各字段的 `expected`、`actual`、`verifiedAt` 与 `source`（主表单／草稿恢复页）；正文带 emoji 时附实际字符读回与显示截图，说明已验证阶段；核验过才标一致。
 - `upload`：当前阶段、源文件指纹、已上传数量及顺序，视频实际时长与播放验证；未知项明确为未知。
 - `covers`：每槽位源路径与 SHA-256、主表单是否接受、裁切效果、读取时间与截图／可见文字证据。
 - `browser`：当前工作区、平台页标签与实际结果／管理地址；独立核验的帖子 ID、预约时间和状态。
