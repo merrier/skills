@@ -115,6 +115,25 @@ class PublishPackageTest(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Unknown private preference'):
                     config()
 
+    def test_backend_entry_roundtrip_and_rejects_transient_urls(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'config.json'
+            with patch.dict(os.environ, {'EGO_PUBLISH_CONFIG': str(path)}):
+                entry = 'https://creator.example.com/content/manage'
+                value = {'platforms': {'xiaohongshu': {'backendUrl': entry}}}
+                path.write_text(json.dumps(value))
+                before = path.read_bytes()
+                self.assertEqual(config()['preferences']['platforms']['xiaohongshu']['backendUrl'], entry)
+                self.assertEqual(path.read_bytes(), before)
+                for invalid in (None, '', 'http://creator.example.com',
+                                'https://user:secret@creator.example.com',
+                                entry + '?token=secret', entry + '#callback', ' ' + entry):
+                    with self.subTest(url=invalid):
+                        value['platforms']['xiaohongshu']['backendUrl'] = invalid
+                        path.write_text(json.dumps(value))
+                        with self.assertRaises(ValueError):
+                            config()
+
 
 if __name__ == '__main__':
     unittest.main()

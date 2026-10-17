@@ -7,6 +7,7 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 from uuid import UUID
 from zoneinfo import ZoneInfo
 
@@ -54,7 +55,14 @@ def config():
     require(isinstance(result['platforms'], dict), 'platforms must be an object')
     for platform, preferences in result['platforms'].items():
         require(platform in PLATFORMS and isinstance(preferences, dict), 'Invalid platform preferences')
-        require(not preferences.keys() - {'titleFormat', 'collectionRule', 'collections'}, 'Unknown platform preference')
+        require(not preferences.keys() - {'titleFormat', 'collectionRule', 'collections', 'backendUrl'}, 'Unknown platform preference')
+        if 'backendUrl' in preferences:
+            value = preferences['backendUrl']
+            require(isinstance(value, str) and value == value.strip(), 'backendUrl must be a clean HTTPS URL')
+            url = urlsplit(value)
+            require(url.scheme == 'https' and url.hostname and not
+                    (url.username or url.password or url.query or url.fragment),
+                    'backendUrl must be HTTPS without credentials, query or fragment')
         require(isinstance(preferences.get('titleFormat', ''), str), 'titleFormat must be text')
         require(preferences.get('collectionRule', 'per_post') in {'per_post', 'model_scale'}, 'Invalid collectionRule')
         collections = preferences.get('collections', {})
