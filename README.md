@@ -12,6 +12,7 @@
 | `toy-model-info` | 从模型实拍、包装及货号识别产品，优先用 AnySearch 检索，保存逐项来源与核实状态，供封面和发布复用。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info` |
 | `toy-cover` | 根据汽车模型与玩具实拍，按画幅分别选图，确认主副标题后制作多比例封面。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-cover` |
 | `ego-publish` | 使用 Ego lite 统一确认发布方案，依次向小红书、B站、抖音和视频号发布；各平台独立标签页，完成后保留结果供检查。 | `$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish` |
+| `taobao-invoice` | 先确认订单范围、开票信息及合并规则，再用 Ego 申请淘宝发票、联系商家并跟进结果。 | `$skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice` |
 
 发布到 GitHub 并设为 public 后，其他用户就可以通过上面的命令安装。
 
@@ -24,9 +25,12 @@ $skill-installer install https://github.com/merrier/skills/tree/main/plugin-stor
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-cover
 $skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
+$skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice
 ```
 
 安装完成后，重启 Codex 以加载新的 skill。
+
+`taobao-invoice` 依赖 Ego 浏览器与已安装的 `ego-browser` skill，需要用户登录淘宝并确认执行范围。订单清单及开票资料保存在公开仓库之外；支持先试少量商家、同店合并、直接申请优先，以及“电子发票已开即可”的完成标准。
 
 `toy-model-info` 优先复用已安装的 [AnySearch skill](https://github.com/anysearch-ai/anysearch-skill) 检索及提取原文；不可用时可使用用户允许的现有搜索工具，不自动安装或注册服务。资料保存在各模型素材目录的 `模型信息.md`，区分已核实、用户提供、待核实与冲突信息。`toy-cover` 和 `ego-publish` 优先读取这份资料，缺少关键参数时可调用已安装的 `toy-model-info` 补充；资料整理不代替文案确认或平台发布授权。
 
@@ -54,6 +58,7 @@ ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 ├── toy-model-info/
 ├── toy-cover/
 ├── ego-publish/
+├── taobao-invoice/
 └── plugin-store-assets/
     ├── SKILL.md
     ├── LICENSE.txt

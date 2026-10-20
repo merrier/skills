@@ -1,0 +1,4 @@
+interface:
+  display_name: "淘宝订单开票"
+  short_description: "先确认订单范围、开票信息与合并规则，再用 Ego 申请发票并跟进商家"
+  default_prompt: "使用 $taobao-invoice 帮我处理淘宝订单开票，先确认商品范围、开票信息和合并规则，再通过 Ego 执行。"
