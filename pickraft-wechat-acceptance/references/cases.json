@@ -1,0 +1,1803 @@
+{
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-17",
+  "cases": [
+    {
+      "id": "DISC-01",
+      "area": "发现",
+      "title": "推荐与混排",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "进入发现",
+        "连续加载三屏",
+        "对比重复进入的首屏分类/来源/需照片属性"
+      ],
+      "expected": [
+        "推荐默认选中",
+        "不同维度混排",
+        "不出现分页器",
+        "随机结果允许偶然相同"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-02",
+      "area": "发现",
+      "title": "无限滚动与详情返回",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "加载至少48条",
+        "记下卡片顺序及位置",
+        "打开详情再返回",
+        "继续加载"
+      ],
+      "expected": [
+        "原内容及位置保持，追加无重复",
+        "列表请求不超云端响应体积"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-03",
+      "area": "发现",
+      "title": "跨Tab保持",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "滚动发现到1500px",
+        "切我的再回发现"
+      ],
+      "expected": [
+        "卡片顺序和已加载数量不变，位置误差不超过5px"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-04",
+      "area": "发现",
+      "title": "搜索与筛选竞态",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "连续更换分类与关键词",
+        "搜不存在词",
+        "清空筛选"
+      ],
+      "expected": [
+        "只展示最后一次请求结果",
+        "空态可恢复，无旧结果覆盖"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-05",
+      "area": "发现",
+      "title": "今日限免筛选",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "打开今日限免",
+        "查看详情",
+        "在隔离时钟跨上海零点后重进"
+      ],
+      "expected": [
+        "当日仅5款合格模板",
+        "剩余次数和名单更新，无旧名单免费下单"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-06",
+      "area": "发现",
+      "title": "网络失败及目录变更",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离接口注入Feed断网与CATALOG_CHANGED",
+        "点击重试"
+      ],
+      "expected": [
+        "已加载内容保留",
+        "提示可恢复",
+        "游标失效能重新加载"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DISC-07",
+      "area": "发现",
+      "title": "瀑布流与图片缓存",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "查看横竖图",
+        "重复访问封面，记录响应和304",
+        "进入多图详情"
+      ],
+      "expected": [
+        "缩略图480宽、预览1080宽",
+        "原比例无重叠",
+        "下架服务端不返回304"
+      ],
+      "assets": [
+        "landscape.png",
+        "portrait.png"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/IMAGE_PERFORMANCE.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-01",
+      "area": "详情与模板",
+      "title": "轮播与相关推荐",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "打开单图/多图详情",
+        "手动切换，等待自动轮播",
+        "点击相关推荐返回"
+      ],
+      "expected": [
+        "单图不自动轮播",
+        "多图可切换",
+        "相关推荐双列原比例",
+        "原图预览不拿缩略图替代"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-02",
+      "area": "详情与模板",
+      "title": "收藏及收藏瀑布流",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用账户收藏再取消",
+        "进入我的收藏",
+        "打开详情返回"
+      ],
+      "expected": [
+        "收藏状态持久化",
+        "取消后消失",
+        "瀑布流比例正常",
+        "无跨账户读取"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-03",
+      "area": "详情与模板",
+      "title": "复制Prompt与多来源",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "展开Prompt和来源",
+        "复制",
+        "使用多来源模板"
+      ],
+      "expected": [
+        "复制全文与原Prompt一致",
+        "所有来源/示例保留，不仅显示第一个来源"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-04",
+      "area": "详情与模板",
+      "title": "首次另存与删除",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "另存后不保存退出",
+        "重新另存修改保存",
+        "更多中取消/确认删除"
+      ],
+      "expected": [
+        "首次退出无副本",
+        "保存只建一份私有副本且原模板不变",
+        "删除仅副本"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-05",
+      "area": "详情与模板",
+      "title": "审核公开生命周期",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用用户申请公开",
+        "管理员拒绝后重提",
+        "通过后下架/恢复"
+      ],
+      "expected": [
+        "待审不可公开",
+        "旧版本不被未审修改覆盖",
+        "状态/版本冲突可恢复"
+      ],
+      "assets": [
+        "product.png"
+      ],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DETAIL-06",
+      "area": "详情与模板",
+      "title": "私有及失效模板入口",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "游客/用户B访问用户A模板",
+        "下架后用旧链接进入"
+      ],
+      "expected": [
+        "私有/下架拒绝且无图片泄露",
+        "可返回发现",
+        "不提供分享"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/data/latest-release-wechat-20261014.json",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "AUTH-01",
+      "area": "身份与资料",
+      "title": "首登赠送与跳过",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用新账户登录",
+        "跳过资料",
+        "退出重登"
+      ],
+      "expected": [
+        "只送一次100分",
+        "不重复弹层",
+        "跳过不占昵称修改次数"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/PROFILE_ONBOARDING.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "AUTH-02",
+      "area": "身份与资料",
+      "title": "昵称边界与审核",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "依次输入copy.json昵称边界",
+        "模拟pass/review/risky/timeout",
+        "相同昵称重存"
+      ],
+      "expected": [
+        "最多20码点",
+        "非法输入拒绝",
+        "失败保留旧值",
+        "相同值不消耗修改次数"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/PROFILE_ONBOARDING.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "AUTH-03",
+      "area": "身份与资料",
+      "title": "昵称年度并发",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用账户保存",
+        "模拟365天前后",
+        "同时提交两种昵称"
+      ],
+      "expected": [
+        "冷却期拒绝",
+        "到期才允许",
+        "并发不能绕过",
+        "头像不占改名次数"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/PROFILE_ONBOARDING.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "AUTH-04",
+      "area": "身份与资料",
+      "title": "头像上传与替换",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用账户选择合成头像、取消、保存、换头像",
+        "用户B访问其地址"
+      ],
+      "expected": [
+        "取消不写",
+        "256方图重编码",
+        "旧文件清理",
+        "签名权限隔离"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/PROFILE_ONBOARDING.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "AUTH-05",
+      "area": "身份与资料",
+      "title": "会话过期及账户隔离",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "账户A进入照片/作品，将隔离测试凭证设为临近过期或已过期",
+        "模拟微信重新验证成功，检查自动恢复；并发请求只续期一次",
+        "模拟恢复失败及微信账号变化，再显式登录B",
+        "检查生成、支付和上传收到401后不会自动重发"
+      ],
+      "expected": [
+        "首次登录仍确认；已有会话自动恢复，不弹重复登录确认",
+        "网络失败不清除原凭证，已过期时不发送写操作",
+        "仅同一账户可静默恢复；身份变化要求显式登录",
+        "A的照片、任务、积分、通知不在B展示；业务写操作不自动重试"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/PROFILE_ONBOARDING.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "UPLOAD-01",
+      "area": "上传与推荐",
+      "title": "正常及多角色选图",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "从模板依次选人物/脸型/姿态，再替换其中一张"
+      ],
+      "expected": [
+        "每个角色独立",
+        "缺必填不可生成",
+        "上传完回当前模板"
+      ],
+      "assets": [
+        "portrait.png",
+        "face.png",
+        "pose.png"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "UPLOAD-02",
+      "area": "上传与推荐",
+      "title": "大图与EXIF",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "生成边界素材，上传high-resolution.jpg、oriented.jpg"
+      ],
+      "expected": [
+        "不裁切",
+        "最长边2048",
+        "EXIF方向正确",
+        "小图不放大"
+      ],
+      "assets": [
+        "boundary"
+      ],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "UPLOAD-03",
+      "area": "上传与推荐",
+      "title": "非法及错误层级",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "上传255短边、损坏、GIF、超10MiB",
+        "然后重试合法图"
+      ],
+      "expected": [
+        "错误在选图弹层内可见",
+        "可重试",
+        "不创建无效照片"
+      ],
+      "assets": [
+        "tiny.png",
+        "corrupt.jpg",
+        "unsupported.gif",
+        "boundary"
+      ],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "UPLOAD-04",
+      "area": "上传与推荐",
+      "title": "照片分析与降级",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "拒绝分析",
+        "模拟成功/失败/超时",
+        "重复分析已有结果"
+      ],
+      "expected": [
+        "拒绝仍可浏览",
+        "失败通用推荐",
+        "缓存不重复调用",
+        "不公开照片"
+      ],
+      "assets": [
+        "product.png"
+      ],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "UPLOAD-05",
+      "area": "上传与推荐",
+      "title": "照片删除与并发",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "上传专用图片，删除取消再确认",
+        "生成引用期间尝试删除"
+      ],
+      "expected": [
+        "取消保留",
+        "删除不影响已成作品",
+        "生成中引用按服务端约束处理，无数据泄露"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-01",
+      "area": "生成与积分",
+      "title": "免费文生图",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "当日合格模板选择免费并提交一次",
+        "等待完成"
+      ],
+      "expected": [
+        "不扣积分",
+        "免费剩余减1",
+        "默认品牌分享图",
+        "无供应商名"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-02",
+      "area": "生成与积分",
+      "title": "精细文生图",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "专用有余额账户无图模板提交一次"
+      ],
+      "expected": [
+        "冻结100，成功扣100，原图可用",
+        "任务ID不展示"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-03",
+      "area": "生成与积分",
+      "title": "单参考图",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "在生成角色设定选一张合格参考并提交"
+      ],
+      "expected": [
+        "角色输入正确",
+        "成功原图和积分一致"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-04",
+      "area": "生成与积分",
+      "title": "双参考图",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "控制人物脸型依人物/脸型顺序选图提交"
+      ],
+      "expected": [
+        "两张角色不互换",
+        "成功只按输出数扣分"
+      ],
+      "assets": [
+        "portrait.png",
+        "face.png"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-05",
+      "area": "生成与积分",
+      "title": "三参考图",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "手绘图控制多角色姿态选两个角色和姿态提交"
+      ],
+      "expected": [
+        "三图顺序正确",
+        "缺任意必填阻止",
+        "返回可恢复选择"
+      ],
+      "assets": [
+        "portrait.png",
+        "face.png",
+        "pose.png"
+      ],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-06",
+      "area": "生成与积分",
+      "title": "三张整套",
+      "priority": "P0",
+      "mode": "paid",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "悬浮解构美食系列提交三张计划",
+        "离页再返回"
+      ],
+      "expected": [
+        "同一任务逐张3/3",
+        "扣300",
+        "每张保存目标正确"
+      ],
+      "assets": [
+        "copy.json"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-07",
+      "area": "生成与积分",
+      "title": "失败退回与重试",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离模拟402/明确失败",
+        "返回模板",
+        "重新主动提交"
+      ],
+      "expected": [
+        "冻结释放一次",
+        "无输出不显示删除作品/订阅",
+        "不自动再调模型"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-08",
+      "area": "生成与积分",
+      "title": "部分成功与补生成",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离制造3张中1失败",
+        "点击仅补失败项"
+      ],
+      "expected": [
+        "保留成功图",
+        "只补失败项",
+        "积分仅按新增交付结算"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-09",
+      "area": "生成与积分",
+      "title": "结果不明与维护",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离制造调用超时unknown",
+        "重进",
+        "运行隔离维护核对"
+      ],
+      "expected": [
+        "不自动重生",
+        "预占保持直到明确核对",
+        "核对成功/失败只结算一次"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-10",
+      "area": "生成与积分",
+      "title": "重复点击与断网恢复",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离提交后丢响应",
+        "相同幂等键重试",
+        "另一设备再提交"
+      ],
+      "expected": [
+        "只有一个任务/冻结",
+        "单用户互斥",
+        "不会因未知结果重复调用"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "GEN-11",
+      "area": "生成与积分",
+      "title": "限额与跨天归还",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离耗尽3次免费/积分不足/限流",
+        "跨零点完成或失败"
+      ],
+      "expected": [
+        "禁用或明确提示",
+        "失败返原日期",
+        "免费不自动转精细",
+        "限流仍有效"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/GENERATION_REPAIR.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "EXPORT-01",
+      "area": "原图保存",
+      "title": "品牌与原图下载",
+      "priority": "P0",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "用已有免费/精细输出下载",
+        "开启合法域名校验"
+      ],
+      "expected": [
+        "免费默认品牌图",
+        "精细直接原图",
+        "下载HTTP成功且可解码"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/DOWNLOAD_DOMAIN_SETUP.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "EXPORT-02",
+      "area": "原图保存",
+      "title": "历史免费作品原图免费保存",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "打开已有历史免费作品，保存原图并重新进入",
+        "检查旧解锁请求兼容与积分余额"
+      ],
+      "expected": [
+        "保存原图，无积分解锁按钮",
+        "重复下载和旧解锁请求不扣积分，无新生成"
+      ],
+      "assets": [],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/DOWNLOAD_DOMAIN_SETUP.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "EXPORT-03",
+      "area": "原图保存",
+      "title": "保存按钮样式",
+      "priority": "P0",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "打开已有历史免费作品"
+      ],
+      "expected": [
+        "统一显示保存原图，不出现解锁或品牌分享图按钮"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/DOWNLOAD_DOMAIN_SETUP.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "EXPORT-04",
+      "area": "原图保存",
+      "title": "删除作品",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "成功/部分/失败作品取消与确认删除"
+      ],
+      "expected": [
+        "无输出失败不显示删除",
+        "成功删除仅本人，不影响模板和其他账户"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/DOWNLOAD_DOMAIN_SETUP.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "INVITE-01",
+      "area": "邀请",
+      "title": "登录即可邀请",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "专用从未生成账户登录并准备邀请"
+      ],
+      "expected": [
+        "邀请码与二维码显示",
+        "无精细生成门槛",
+        "无日/月上限文案"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/INVITATION_BINDING.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "INVITE-02",
+      "area": "邀请",
+      "title": "绑定与一次奖励",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "新老用户分别填短码/扫码",
+        "取消后确认",
+        "重复提交"
+      ],
+      "expected": [
+        "取消无写",
+        "确认只能绑定一次",
+        "邀请人加100且幂等",
+        "旧精细用户也能绑"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/INVITATION_BINDING.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "INVITE-03",
+      "area": "邀请",
+      "title": "第二阶段及排除",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离绑定前任务/免费/个人/模拟/失败，再绑定后7天内精细成功"
+      ],
+      "expected": [
+        "仅合格新精细首次成功再奖100",
+        "过期不奖，永久积分不设过期"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/INVITATION_BINDING.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "INVITE-04",
+      "area": "邀请",
+      "title": "邀请码异常与个人上限",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离自邀/无效/已绑定/个人满100",
+        "换另一邀请人"
+      ],
+      "expected": [
+        "明确拒绝错误",
+        "平台不限制总人数",
+        "并发不超个人限额"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/INVITATION_BINDING.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-01",
+      "area": "我的与反馈",
+      "title": "主题和帮助",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "切浅/深/系统",
+        "重进",
+        "帮助折叠与返回"
+      ],
+      "expected": [
+        "偏好保留",
+        "文本和图标对齐",
+        "规则与功能一致",
+        "帮助非原型"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-02",
+      "area": "我的与反馈",
+      "title": "通知列表与已读",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离成功/失败/部分/unknown任务",
+        "未读筛选",
+        "进入再返回"
+      ],
+      "expected": [
+        "只本人最新状态",
+        "已读保存",
+        "新版本状态再次未读"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-03",
+      "area": "我的与反馈",
+      "title": "反馈提交和重试",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离能力失败后恢复",
+        "填文案、3张图、联系方式",
+        "提交丢响应再试"
+      ],
+      "expected": [
+        "草稿保留",
+        "同内容幂等",
+        "格式/大小限制",
+        "回执正确",
+        "不公开客服邮箱"
+      ],
+      "assets": [
+        "copy.json",
+        "product.png"
+      ],
+      "history": {
+        "level": "devtools-mock",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-04",
+      "area": "我的与反馈",
+      "title": "反馈真实投递",
+      "priority": "P1",
+      "mode": "external-message",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "批准后仅发一封合成反馈",
+        "核对SES和收件箱"
+      ],
+      "expected": [
+        "设备字段正确",
+        "无凭证",
+        "SES接受与收件箱收到分开记录"
+      ],
+      "assets": [
+        "copy.json",
+        "product.png"
+      ],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-05",
+      "area": "我的与反馈",
+      "title": "反馈配额与隔离",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离每日5次、超体积、A回执由B请求、发送unknown"
+      ],
+      "expected": [
+        "第6次拒绝",
+        "隐私隔离",
+        "unknown不盲目重发"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-06",
+      "area": "我的与反馈",
+      "title": "购买关闭与记录",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "进入充值预览及已有订单",
+        "能力接口只读检查"
+      ],
+      "expected": [
+        "purchaseEnabled=false且sandbox=false",
+        "无可付款按钮",
+        "历史订单隔离"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-07",
+      "area": "我的与反馈",
+      "title": "个人API关闭",
+      "priority": "P1",
+      "mode": "read-only",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "访问个人API页及生成来源"
+      ],
+      "expected": [
+        "关闭入口",
+        "不能绑定/使用供应商",
+        "不回传密钥"
+      ],
+      "assets": [],
+      "history": {
+        "level": "devtools-real",
+        "evidence": "docs/ACCOUNT_HELP_NOTIFICATIONS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ADMIN-01",
+      "area": "运营与安全",
+      "title": "授权及权限拒绝",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离普通/管理员/超级管理员依次尝试审核和授权",
+        "撤销后再试"
+      ],
+      "expected": [
+        "非授权接口拒绝",
+        "超管操作有审计",
+        "不能自己提权"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/LAUNCH_READINESS.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ADMIN-02",
+      "area": "运营与安全",
+      "title": "多入口去重与发布",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离导入相同Prompt不同图片来源",
+        "审核后查详情"
+      ],
+      "expected": [
+        "只有规范主模板",
+        "新示例/来源不丢",
+        "未审资产不公开"
+      ],
+      "assets": [
+        "copy.json",
+        "product.png"
+      ],
+      "history": {
+        "level": "partial",
+        "evidence": "docs/LAUNCH_READINESS.md",
+        "note": "历史证据只覆盖描述过的子步骤；本用例更完整，仍需整项复测"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ADMIN-03",
+      "area": "运营与安全",
+      "title": "限免后台控制",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离暂停全局/单模板",
+        "客户端刷新再提交"
+      ],
+      "expected": [
+        "新任务拒绝免费",
+        "不自动扣分",
+        "恢复后按名单可用"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/LAUNCH_READINESS.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "ADMIN-04",
+      "area": "运营与安全",
+      "title": "积分调整与未知核对",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "专用隔离账户/本地故障注入，不操作生产用户",
+      "steps": [
+        "隔离超管加减分和核对unknown",
+        "重复请求"
+      ],
+      "expected": [
+        "审计有原因",
+        "只结算一次",
+        "普通管理员不能越权"
+      ],
+      "assets": [],
+      "history": {
+        "level": "not-evidenced",
+        "evidence": "docs/LAUNCH_READINESS.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DEVICE-01",
+      "area": "原生能力",
+      "title": "分享和朋友圈回流",
+      "priority": "P1",
+      "mode": "device",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "两有体验权限账户：好友卡片、取消、朋友圈单页、打开完整小程序"
+      ],
+      "expected": [
+        "公开同模板",
+        "私有不分享",
+        "单页不读取私人数据",
+        "取消不误报成功"
+      ],
+      "assets": [],
+      "history": {
+        "level": "device-pending",
+        "evidence": "docs/REAL_DEVICE_ACCEPTANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DEVICE-02",
+      "area": "原生能力",
+      "title": "相册与二维码",
+      "priority": "P1",
+      "mode": "device",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "iOS/Android允许/拒绝/重新授权保存",
+        "长按扫码"
+      ],
+      "expected": [
+        "图片完整",
+        "失败可恢复",
+        "回同款不暴露照片或绑定邀请"
+      ],
+      "assets": [],
+      "history": {
+        "level": "device-pending",
+        "evidence": "docs/REAL_DEVICE_ACCEPTANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DEVICE-03",
+      "area": "原生能力",
+      "title": "微信订阅送达",
+      "priority": "P1",
+      "mode": "device",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "授权/拒绝/取消",
+        "获批生成后等待完成通知并打开"
+      ],
+      "expected": [
+        "真实收件且本人任务",
+        "不重复或越权",
+        "拒绝不影响生成"
+      ],
+      "assets": [],
+      "history": {
+        "level": "device-pending",
+        "evidence": "docs/REAL_DEVICE_ACCEPTANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DEVICE-04",
+      "area": "原生能力",
+      "title": "微信资料与系统适配",
+      "priority": "P1",
+      "mode": "device",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "原生昵称建议/头像选择取消",
+        "小屏大字号深色键盘"
+      ],
+      "expected": [
+        "输入合法",
+        "布局不遮挡",
+        "微信原生行为单独记录"
+      ],
+      "assets": [],
+      "history": {
+        "level": "device-pending",
+        "evidence": "docs/REAL_DEVICE_ACCEPTANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "DEVICE-05",
+      "area": "原生能力",
+      "title": "弱网后台及缓存",
+      "priority": "P1",
+      "mode": "device",
+      "preconditions": "核对目标版本和环境；涉及外部行为需当次授权",
+      "steps": [
+        "飞行模式/切网/锁屏/杀进程重入",
+        "重复打开图片"
+      ],
+      "expected": [
+        "可恢复",
+        "原任务不重生",
+        "缓存实际命中",
+        "返回位置在适用生命周期保留"
+      ],
+      "assets": [],
+      "history": {
+        "level": "device-pending",
+        "evidence": "docs/REAL_DEVICE_ACCEPTANCE.md",
+        "note": "未找到当前完整流程的开发者工具验收证据；不表示代码未实现"
+      },
+      "status": "not-run"
+    },
+    {
+      "id": "PARAM-01",
+      "area": "模板参数",
+      "title": "参数填写、校验与生成快照",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "启动隔离 API 并构建本地客户端；不修改生产模板",
+      "steps": [
+        "打开重复城市参数及姓名参数的模板",
+        "空值、21字符与安全拒绝内容分别提交",
+        "填写合法城市姓名并生成",
+        "验证幂等冲突及整套补生成参数快照"
+      ],
+      "expected": [
+        "同名字段只填写一次",
+        "错误不调用模型、不扣积分",
+        "执行 Prompt 已替换且用户值不被二次解析",
+        "补生成沿用原参数和 Prompt"
+      ],
+      "assets": [],
+      "status": "not-run",
+      "history": {
+        "level": "partial",
+        "evidence": "docs/PROMPT_PARAMETERS.md",
+        "note": "开发者工具模拟链路通过，真实模型及微信安全服务未验证"
+      }
+    },
+    {
+      "id": "SHARE-RATE-01",
+      "area": "创作结果",
+      "title": "半星评分、分享入口和官方事件调用",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "隔离 API、本地构建、合成已完成任务，不对外分享",
+      "steps": [
+        "点击第四颗左半区和第五颗右半区",
+        "核对服务端评分",
+        "打开分享选项",
+        "检查原生按钮和 reportEvent 调用"
+      ],
+      "expected": [
+        "3.5 和 5 分保存成功",
+        "好友按钮 open-type=share",
+        "上报不包含用户内容",
+        "不将模拟上报误记为微信收数"
+      ],
+      "assets": [],
+      "status": "not-run"
+    },
+    {
+      "id": "GPT-01",
+      "area": "生成方式",
+      "title": "统一 GPT、自动限免与 100 积分生成",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "本地隔离 API、购买关闭、模拟模型，无真实付费请求",
+      "steps": [
+        "打开积分模板，确认无模型选择且按钮为生成",
+        "生成并核对仅扣 100 积分",
+        "打开限免模板使用三次免费额度，再检查费用提示",
+        "检查超过一分钟和三分钟的等待提示、套餐与帮助说明"
+      ],
+      "expected": [
+        "统一生成入口，不要求选择限免或积分模式",
+        "模拟生成成功且仅扣 100 积分",
+        "限免使用同一模型，不扣积分；额度用完展示付费金额但不自动提交",
+        "等待提示清晰，套餐与帮助无旧的双模型价格"
+      ],
+      "assets": [],
+      "history": {
+        "evidence": "docs/GPT_GENERATION_IMPLEMENTATION.md"
+      }
+    },
+    {
+      "id": "ACCOUNT-LEGAL",
+      "area": "作品与协议",
+      "title": "协议与隐私入口",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "隔离 API 设置 PICKRAFT_GALLERY_FIXTURE=true；不调用真实模型",
+      "steps": [
+        "未登录从帮助与登录区打开两份协议",
+        "返回原页面"
+      ],
+      "expected": [
+        "正文与运营主体正确",
+        "无需登录阅读，返回可继续原操作"
+      ],
+      "assets": [],
+      "status": "not-run"
+    },
+    {
+      "id": "WORKS-GALLERY",
+      "area": "作品与协议",
+      "title": "作品瀑布流与四 Tab",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "隔离 API 设置 PICKRAFT_GALLERY_FIXTURE=true；不调用真实模型",
+      "steps": [
+        "展示横图、竖图、整套结果与失败任务",
+        "作品详情返回作品，再切回发现"
+      ],
+      "expected": [
+        "四 Tab 顺序为发现、创作、作品、我的",
+        "图片完整按比例展示，整套无遗漏",
+        "我的无重复作品入口，Feed 内容与滚动位置保留"
+      ],
+      "assets": [],
+      "status": "not-run"
+    },
+    {
+      "id": "ACCOUNT-ID-MIGRATION",
+      "area": "Account",
+      "title": "Numeric account ID login and copy",
+      "priority": "P0",
+      "mode": "production-login-read-only",
+      "preconditions": "Account migration is complete; real WeChat login is authorized; no generation or payment calls.",
+      "steps": [
+        "Log in again with the current WeChat account",
+        "Open account profile",
+        "Copy the displayed account ID and read clipboard after completion"
+      ],
+      "expected": [
+        "Existing migrated account is reused without another welcome grant",
+        "Account ID is exactly 10 digits",
+        "Clipboard matches the displayed ID"
+      ],
+      "history": []
+    },
+    {
+      "id": "DAILY-FIRST",
+      "area": "生成计费",
+      "title": "每日首张 90 后续 100，无今日限免",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_DAILY_FIRST_FIXTURE=true，本地隔离 API，模拟模型",
+      "steps": [
+        "检查发现无限免入口，首张生成扣 90、第二张扣 100",
+        "整套 290，第一张失败退回 90，再补生成扣 90",
+        "检查历史免费作品保存入口、我的、帮助、充值文案"
+      ],
+      "expected": [
+        "生成按钮统一，费用明确",
+        "优惠仅占一张，失败恢复，补生成不重生成功图片",
+        "历史导出不变，购买仍关闭"
+      ],
+      "assets": [],
+      "status": "not-run"
+    },
+    {
+      "id": "IMMERSIVE-HOME",
+      "title": "首页沉浸导航与吸顶分类",
+      "area": "发现",
+      "priority": "P1",
+      "mode": "devtools-cloud-read-only",
+      "preconditions": "云端目标构建，无生成或支付提交",
+      "steps": [
+        "检查首屏、80/400/900 滚动位置",
+        "分类横滑、分类切换、搜索和筛选",
+        "运行 smoke 检查分页、详情及跨 Tab 返回"
+      ],
+      "expected": [
+        "导航和胶囊不重叠，分类吸顶",
+        "横滑不改变纵向位置，切分类刷新",
+        "分页追加正常，返回位置保留"
+      ],
+      "assets": [],
+      "status": "not-run"
+    },
+    {
+      "id": "ADMIN-FEATURED",
+      "area": "管理员",
+      "title": "精选设置与分类排序",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "本地隔离 API 和管理员、普通测试账户，无真实用户数据",
+      "steps": [
+        "详情更多中取消并设置精选",
+        "从我的进入精选管理",
+        "拖动排序并保存，切换分类验证独立顺序",
+        "并发修改后保存旧顺序",
+        "检查长列表滚动、长标题、深浅色",
+        "普通账户检查入口和直接访问"
+      ],
+      "expected": [
+        "状态可切换且不重复添加",
+        "分类内顺序持久化",
+        "过期保存被拒绝且保留本地调整",
+        "列表和底部保存按钮正常显示",
+        "普通账户入口隐藏且访问被拒绝"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-1",
+      "area": "反馈回归",
+      "title": "奖励通知直达投稿详情",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "reward notification opens its own approved submission",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-2",
+      "area": "反馈回归",
+      "title": "投稿卡片完整展示",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "two submission cards have unclipped content",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-3",
+      "area": "反馈回归",
+      "title": "作品详情不再推荐其他效果",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "pet work no longer offers template-inferred photo recommendations",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-4",
+      "area": "反馈回归",
+      "title": "无照片公开申请可见",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "no-photo public application visible",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-5",
+      "area": "反馈回归",
+      "title": "链接投稿队列可见",
+      "priority": "P1",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "manual link submission visible in labeled queue",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "FEEDBACK-20261028-6",
+      "area": "反馈回归",
+      "title": "费用确认前会话过期恢复",
+      "priority": "P0",
+      "mode": "isolated",
+      "preconditions": "PICKRAFT_FEEDBACK_20261028=true 的本地隔离服务；禁止上传模拟包",
+      "steps": [
+        "运行 tests/wechat/feedback-followup-20261028.mjs 中对应实际点击步骤"
+      ],
+      "expected": [
+        "quote 401 clears stale UI and next generate opens login without creating task",
+        "无真实生成、邮件或奖励发放"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "status": "not-run"
+    },
+    {
+      "id": "NAV-01",
+      "area": "页面导航",
+      "title": "独立页面与原生返回",
+      "priority": "P1",
+      "mode": "devtools-mock",
+      "preconditions": "当前构建；隔离开发者工具项目；不调用模型或审核写操作",
+      "steps": [
+        "套图分类中滚动后进入详情、填写、确认",
+        "填写照片、授权、文字和尺寸后连续原生返回，再打开填写",
+        "用户投稿及管理员审核进入详情再返回",
+        "真机检查左上角及侧滑返回、通知直达详情"
+      ],
+      "expected": [
+        "独立路由，无重复返回按钮",
+        "必填校验留在表单；草稿与照片保留",
+        "列表分类及滚动位置保留",
+        "真机单独记录"
+      ],
+      "assets": [
+        "portrait.png"
+      ],
+      "history": {
+        "level": "none",
+        "evidence": "tests/wechat/native-navigation.mjs",
+        "note": "按本次结果填写；真机单独验收"
+      },
+      "status": "not-run"
+    }
+  ]
+}

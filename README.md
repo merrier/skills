@@ -14,6 +14,9 @@
 | `ego-publish` | 使用 Ego lite 统一确认发布方案，依次向小红书、B站、抖音和视频号发布；各平台独立标签页，完成后保留结果供检查。 | `$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish` |
 | `taobao-invoice` | 先确认订单范围、开票信息及合并规则，再用 Ego 申请淘宝发票、联系商家并跟进结果。 | `$skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice` |
 | `pickraft-template-curation` | 审查 Pickraft 模板，补齐自然输入示例，检查 prompt、比例、参数、分类、标签及多人适配，并完成线上回读。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-template-curation` |
+| `pickraft-social-template-import` | 解析抖音、小红书模板链接，整理提示词和输入要求，生成参考样片并按审核流程录入拾作。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import` |
+| `pickraft-sample-library` | 维护参考照片的筛选、来源和许可记录；公开包不携带私有照片库。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-sample-library` |
+| `pickraft-wechat-acceptance` | 使用微信开发者工具验收拾作页面、生成、积分、邀请、反馈和运营流程。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-wechat-acceptance` |
 
 发布到 GitHub 并设为 public 后，其他用户就可以通过上面的命令安装。
 
@@ -27,6 +30,10 @@ $skill-installer install https://github.com/merrier/skills/tree/main/toy-model-i
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-cover
 $skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
 $skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice
+$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-template-curation
+$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import
+$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-sample-library
+$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-wechat-acceptance
 ```
 
 安装完成后，重启 Codex 以加载新的 skill。
@@ -60,6 +67,10 @@ ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 ├── toy-cover/
 ├── ego-publish/
 ├── taobao-invoice/
+├── pickraft-template-curation/
+├── pickraft-social-template-import/
+├── pickraft-sample-library/
+├── pickraft-wechat-acceptance/
 └── plugin-store-assets/
     ├── SKILL.md
     ├── LICENSE.txt

@@ -1,0 +1,75 @@
+{
+  "origin": "Programmatically authored geometric fixtures; no real people or third-party images. Use freely with this repository.",
+  "files": [
+    {
+      "file": "corrupt.jpg",
+      "sha256": "76d3b6024cea17e8f6fd260d5fc59e5361a6c9a7c59b76d4feb77666ccfeebdd",
+      "bytes": 54,
+      "purpose": "invalid bytes"
+    },
+    {
+      "file": "face.png",
+      "sha256": "bbd60b5d9c09bb945eac3354dc7c80c0f2f3d197a0ec0b3c9c2291190434e73d",
+      "bytes": 17708,
+      "width": 640,
+      "height": 640,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "landscape.png",
+      "sha256": "b40c6cdbaf28e7d52c622ac3ecdde1e2c16d46eb9421b6bdc90617c6fb157acd",
+      "bytes": 22336,
+      "width": 960,
+      "height": 640,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "portrait.png",
+      "sha256": "961f3366cc7ae0480feb1f04283f60fd11a8ed21d687e878b6285da49c4af208",
+      "bytes": 19458,
+      "width": 640,
+      "height": 640,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "portraitLong.png",
+      "sha256": "fa8c292ec918ee570c0a60d43bd4018b290e53bdef6ac5a85da56c05f921893a",
+      "bytes": 18469,
+      "width": 640,
+      "height": 1280,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "pose.png",
+      "sha256": "faf2ab3eda33b65dec1fcba0552ed2bead5e30d9fd5d901962d229610488b35e",
+      "bytes": 18455,
+      "width": 640,
+      "height": 640,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "product.png",
+      "sha256": "186bd2068f3f898bc5eb1c0cd42499417d4138480622656dd699110bce3444ee",
+      "bytes": 16415,
+      "width": 640,
+      "height": 640,
+      "purpose": "synthetic pipeline fixture"
+    },
+    {
+      "file": "tiny.png",
+      "sha256": "9c270e4b026b64e9243cca286293a6cdfdaab93898bc4f013b18c815295c3769",
+      "bytes": 1390,
+      "width": 255,
+      "height": 255,
+      "purpose": "short edge rejection"
+    },
+    {
+      "file": "unsupported.gif",
+      "sha256": "23c5809937c79c68e684a558cfabe9eed7791ba202406a34122243e6a77f92e9",
+      "bytes": 462,
+      "width": 300,
+      "height": 300,
+      "purpose": "unsupported format"
+    }
+  ]
+}

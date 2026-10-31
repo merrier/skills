@@ -1,0 +1,30 @@
+{
+  "nickname": {
+    "valid": "拾作验收用户",
+    "twenty": "一二三四五六七八九十一二三四五六七八九十",
+    "twentyOne": "一二三四五六七八九十一二三四五六七八九十一",
+    "emoji": "测试😀用户",
+    "whitespace": "   ",
+    "control": "测试\n用户"
+  },
+  "feedback": {
+    "valid": "自动化验收专用反馈：图片上传后，页面显示结果。请忽略这条合成测试消息。",
+    "short": "测试",
+    "email": "qa@example.invalid",
+    "invalidContact": "not-an-address",
+    "note": "合成数据，不对应真实用户；不得自动发送邮件。"
+  },
+  "prompts": {
+    "text": "画一个悬浮岛，岛上有一座小屋和一棵树，温暖的插画风格，无文字。",
+    "single": "参考上传的合成人物配色，绘制简洁的角色设定图，保持蓝色上衣。",
+    "multi": "图一为角色配色参考，图二为圆脸轮廓参考，生成同一个角色的卡通立绘。",
+    "series": ["画一杯咖啡的正面产品插画，米色背景。", "画同一杯咖啡的俯视产品插画，米色背景。", "画同一杯咖啡的侧面产品插画，米色背景。"],
+    "duplicateVariants": ["Draw a small green bottle on a beige background.", "  Draw a small green bottle on a beige background.  "]
+  },
+  "templates": {
+    "single": "NB-NANO-012",
+    "multi": "NB-NANO-043",
+    "series": "EV-GPT2-2067851560168931394",
+    "note": "历史ID；执行前核对当前公开及可生成状态。限免动态读取当日名单。"
+  }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "拾作社交链接模板录入"
+  short_description: "解析抖音、小红书模板链接，整理提示词并生成参考样片，核对标签后录入拾作"
+
+policy:
+  allow_implicit_invocation: true
