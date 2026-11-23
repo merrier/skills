@@ -54,7 +54,7 @@ description: 使用已有 Easel 安装准备、适配、制作封面并发布社
 
 每次发布前必须读取 [合集规划与加入规则](references/collection-workflow.md)，向用户确认本次是不使用合集、加入已有合集还是创建新合集。用户没有指定时，可以根据内容主题和当前合集列表推荐，但不能替用户创建或加入。
 
-源内容来自 notes 或其他 Markdown 知识库时，发布完成后读取 [Notes 元数据回写规则](references/notes-metadata.md)，把最终确认的合集写入 `category`，把最终话题写入 `tags`，并维护首次公开日期 `published_at` 与实际公开平台 `platforms`。不得覆盖原有无关属性或把未执行的发布计划写成已完成。
+源内容来自 notes 或其他 Markdown 知识库时，发布完成后读取 [Notes 元数据回写规则](references/notes-metadata.md)，把最终确认的合集写入 `category`，把最终话题写入 `tags`，并维护首次公开日期 `published_at`、简短英文路径 `urlname` 与实际公开平台 `platforms`。不得覆盖原有无关属性或把未执行的发布计划写成已完成。
 
 ## 工作流
 
@@ -66,7 +66,7 @@ description: 使用已有 Easel 安装准备、适配、制作封面并发布社
 6. **确认**：列出平台差异、合集、草稿与公开发布范围。只有用户对本次具体内容明确确认后，才能增加 `--exec`、提交草稿或点击最终发布按钮。
 7. **执行**：逐平台调用原 publisher Skill，或按已确认的 Ego 工作流操作。每个平台使用独立标签页，首次真实操作优先有头模式；选择器、页面或必填项与预检不符时停止询问。
 8. **核验**：按原 publisher 的读回规则确认结果。逐平台报告成功、草稿、合集归属、失败或未核实，不把点击完成当成发布成功。
-9. **回写**：目标平台达到用户要求的终态后，更新源 notes 文章的 `category`、`tags`、`published_at` 和 `platforms`，同步用户已经确认的事实修正，并按源仓库要求验证索引、Markdown 和隐私边界。
+9. **回写**：目标平台达到用户要求的终态后，更新源 notes 文章的 `category`、`tags`、`published_at`、`urlname` 和 `platforms`，同步用户已经确认的事实修正，并按源仓库要求验证索引、Markdown 和隐私边界。
 
 跨平台规划示例：
 
