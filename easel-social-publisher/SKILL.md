@@ -52,6 +52,8 @@ description: 使用已有 Easel 安装准备、适配、制作封面并发布社
 
 使用 Ego 发布公众号文章、B站专栏、小红书图文或抖音文章时，另读 [Ego 平台实操与回读规则](references/ego-platform-workflows.md)。它记录真实页面已经验证过的草稿、封面、声明、验证码和结果回读路径；平台页面变化时以当前页面为准。
 
+制作微信公众号正文时读取 [公众号留白禅意排版规则](references/wechat-layout.md)。默认使用 Easel `gzh-design` 的「留白禅意风」组件库及本 Skill 确认的克制变体；用户当次指定其他主题时以当次要求为准。
+
 每次发布前必须读取 [合集规划与加入规则](references/collection-workflow.md)，向用户确认本次是不使用合集、加入已有合集还是创建新合集。用户没有指定时，可以根据内容主题和当前合集列表推荐，但不能替用户创建或加入。
 
 源内容来自 notes 或其他 Markdown 知识库时，发布完成后读取 [Notes 元数据回写规则](references/notes-metadata.md)，把最终确认的合集写入 `category`，把最终话题写入 `tags`，并维护首次公开日期 `published_at`、简短英文路径 `urlname` 与实际公开平台 `platforms`。不得覆盖原有无关属性或把未执行的发布计划写成已完成。
