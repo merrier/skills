@@ -12,6 +12,7 @@
 | `toy-model-info` | 从模型实拍、包装及货号识别产品，优先用 AnySearch 检索，保存逐项来源与核实状态，供封面和发布复用。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info` |
 | `toy-cover` | 根据汽车模型与玩具实拍，按画幅分别选图，确认主副标题后制作多比例封面。 | `$skill-installer install https://github.com/merrier/skills/tree/main/toy-cover` |
 | `ego-publish` | 使用 Ego lite 统一确认发布方案，依次向小红书、B站、抖音和视频号发布；各平台独立标签页，完成后保留结果供检查。 | `$skill-installer install https://github.com/merrier/skills/tree/main/ego-publish` |
+| `easel-social-publisher` | 复用已有 Easel 安装，为七个平台适配内容、制作封面，并在逐项确认后发布或保存草稿。 | `$skill-installer install https://github.com/merrier/skills/tree/main/easel-social-publisher` |
 | `taobao-invoice` | 先确认订单范围、开票信息及合并规则，再用 Ego 申请淘宝发票、联系商家并跟进结果。 | `$skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice` |
 | `pickraft-template-curation` | 审查 Pickraft 模板，补齐自然输入示例，检查 prompt、比例、参数、分类、标签及多人适配，并完成线上回读。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-template-curation` |
 | `pickraft-social-template-import` | 解析抖音、小红书模板链接，整理提示词和输入要求，生成参考样片并按审核流程录入拾作。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import` |
@@ -29,6 +30,7 @@ $skill-installer install https://github.com/merrier/skills/tree/main/plugin-stor
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-model-info
 $skill-installer install https://github.com/merrier/skills/tree/main/toy-cover
 $skill-installer install https://github.com/merrier/skills/tree/main/ego-publish
+$skill-installer install https://github.com/merrier/skills/tree/main/easel-social-publisher
 $skill-installer install https://github.com/merrier/skills/tree/main/taobao-invoice
 $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-template-curation
 $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import
@@ -43,6 +45,8 @@ $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-we
 `toy-model-info` 优先复用已安装的 [AnySearch skill](https://github.com/anysearch-ai/anysearch-skill) 检索及提取原文；不可用时可使用用户允许的现有搜索工具，不自动安装或注册服务。资料保存在各模型素材目录的 `模型信息.md`，区分已核实、用户提供、待核实与冲突信息。`toy-cover` 和 `ego-publish` 优先读取这份资料，缺少关键参数时可调用已安装的 `toy-model-info` 补充；资料整理不代替文案确认或平台发布授权。
 
 `toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。它使用完整正文的统一发布清单，核对素材指纹后续做；个人偏好保存在仓库外的本机配置。清单、配置和核验方法见 [发布清单约定](ego-publish/references/publish-package.md)。仓库不包含素材照片、账号登录状态或历史发布记录。
+
+`easel-social-publisher` 是已有 Easel 安装的 Codex 兼容入口，不捆绑 Easel、浏览器或平台登录态。它在平台适配与发布前增加固定封面阶段，优先复用授权原图，用确定性排版保证中文准确；需要生成背景时使用宿主 ImageGen。发布仍以当前 Easel publisher 或用户明确指定的 Ego 空间为准。
 
 如果只是本机开发调试，也可以将 skill 目录软链接到用户 skills 目录：
 
@@ -66,6 +70,7 @@ ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 ├── toy-model-info/
 ├── toy-cover/
 ├── ego-publish/
+├── easel-social-publisher/
 ├── taobao-invoice/
 ├── pickraft-template-curation/
 ├── pickraft-social-template-import/

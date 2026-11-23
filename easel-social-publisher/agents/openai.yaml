@@ -1,0 +1,4 @@
+interface:
+  display_name: "Easel 社媒发布"
+  short_description: "为七个平台适配内容、制作封面并在逐项确认后发布"
+  default_prompt: "用 $easel-social-publisher 读取我的内容和媒体，确认目标账号、平台、内容形态及草稿或公开发布范围；需要封面时先确认主副标题和素材授权，制作各平台规格并展示预览，再生成发布计划。没有我对本次最终内容的明确确认，不要提交或点击发布。"
