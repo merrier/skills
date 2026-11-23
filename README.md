@@ -46,7 +46,7 @@ $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-we
 
 `toy-cover` 使用宿主环境提供的图像生成／编辑工具；`ego-publish` 另外依赖 Ego lite 与 `ego-browser` skill，各平台需登录并按方案获得发布授权。它使用完整正文的统一发布清单，核对素材指纹后续做；个人偏好保存在仓库外的本机配置。清单、配置和核验方法见 [发布清单约定](ego-publish/references/publish-package.md)。仓库不包含素材照片、账号登录状态或历史发布记录。
 
-`easel-social-publisher` 是已有 Easel 安装的 Codex 兼容入口，不捆绑 Easel、浏览器或平台登录态。它在平台适配与发布前增加固定封面阶段，优先复用授权原图，用确定性排版保证中文准确；需要生成背景时使用宿主 ImageGen。发布仍以当前 Easel publisher 或用户明确指定的 Ego 空间为准。
+`easel-social-publisher` 是已有 Easel 安装的 Codex 兼容入口，不捆绑 Easel、浏览器或平台登录态。它在平台适配与发布前增加固定封面阶段，优先复用授权原图，用确定性排版保证中文准确；需要生成背景时使用宿主 ImageGen。发布仍以当前 Easel publisher 或用户明确指定的 Ego 空间为准。个人默认空间、账号显示名、运行路径和长期适配偏好写入 `EASEL_SOCIAL_PREFS` 或 `~/.config/easel-social-publisher/preferences.md`，不提交到公开仓库。
 
 如果只是本机开发调试，也可以将 skill 目录软链接到用户 skills 目录：
 
