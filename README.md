@@ -18,6 +18,7 @@
 | `pickraft-social-template-import` | 解析抖音、小红书模板链接，整理提示词和输入要求，生成参考样片并按审核流程录入拾作。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import` |
 | `pickraft-sample-library` | 维护参考照片的筛选、来源和许可记录；公开包不携带私有照片库。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-sample-library` |
 | `pickraft-wechat-acceptance` | 使用微信开发者工具验收拾作页面、生成、积分、邀请、反馈和运营流程。 | `$skill-installer install https://github.com/merrier/skills/tree/main/pickraft-wechat-acceptance` |
+| `xiaoyuzhou-episode` | 按节目名和期数查找小宇宙单集，核实标题与嘉宾，按需获取字幕或文字稿并保存内容总结。 | `$skill-installer install https://github.com/merrier/skills/tree/main/xiaoyuzhou-episode` |
 
 发布到 GitHub 并设为 public 后，其他用户就可以通过上面的命令安装。
 
@@ -36,6 +37,7 @@ $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-te
 $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-social-template-import
 $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-sample-library
 $skill-installer install https://github.com/merrier/skills/tree/main/pickraft-wechat-acceptance
+$skill-installer install https://github.com/merrier/skills/tree/main/xiaoyuzhou-episode
 ```
 
 安装完成后，重启 Codex 以加载新的 skill。
@@ -76,6 +78,7 @@ ln -s /path/to/skills/plugin-store-assets ~/.codex/skills/plugin-store-assets
 ├── pickraft-social-template-import/
 ├── pickraft-sample-library/
 ├── pickraft-wechat-acceptance/
+├── xiaoyuzhou-episode/
 └── plugin-store-assets/
     ├── SKILL.md
     ├── LICENSE.txt
